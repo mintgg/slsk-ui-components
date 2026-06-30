@@ -24,6 +24,8 @@
     "start": "next start",
     "lint": "oxlint .",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepare": "husky",
     "commit": "cz && git push"
   },
@@ -47,6 +49,9 @@
   "devDependencies": {
     "@commitlint/cli": "^21.1.0",
     "@commitlint/config-conventional": "^21.1.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
@@ -54,11 +59,13 @@
     "commitizen": "^4.3.2",
     "cz-git": "^1.13.1",
     "husky": "^9.1.7",
+    "jsdom": "^29.1.1",
     "oxlint": "latest",
     "postcss": "latest",
     "tailwindcss": "^3.4.17",
     "tsup": "^8.5.1",
-    "typescript": "latest"
+    "typescript": "latest",
+    "vitest": "^4.1.9"
   },
   "config": {
     "commitizen": {
