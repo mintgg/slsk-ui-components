@@ -1,0 +1,1 @@
+export { SelectExample as SelectDemo } from "@/src/components/select";
