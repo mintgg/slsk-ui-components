@@ -1,9 +1,11 @@
-import type { ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import type { MDXComponents } from "mdx/types.js";
 
 type MDXComponentProps = {
   children?: ReactNode;
 };
+
+type CodeProps = ComponentPropsWithoutRef<"code">;
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -21,10 +23,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <div className="mt-4 leading-7 text-muted-foreground">{children}</div>
     ),
     table: ({ children }: MDXComponentProps) => (
-      <div className="mt-5 overflow-x-auto rounded-2xl border bg-white shadow-sm">
-        <table className="min-w-[760px] border-collapse text-sm">
-          {children}
-        </table>
+      <div className="mt-5 overflow-x-auto rounded-2xl bg-white">
+        <table className="min-w-[760px] text-sm">{children}</table>
       </div>
     ),
     thead: ({ children }: MDXComponentProps) => (
@@ -44,12 +44,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </td>
     ),
     pre: ({ children }: MDXComponentProps) => (
-      <pre className="mt-5 overflow-x-auto rounded-2xl bg-slate-950 p-5 text-sm leading-6 text-slate-50 shadow-sm">
+      <pre className="mt-6 rounded-2xl border bg-white p-10 shadow-sm">
         {children}
       </pre>
     ),
-    code: ({ children }: MDXComponentProps) => (
-      <code className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[0.9em] text-slate-800">
+    code: ({ children, className }: CodeProps) => (
+      <code
+        className={[
+          "rounded-md px-1.5 py-0.5 text-[0.9em]",
+          className ?? "bg-slate-100 text-slate-800",
+        ].join(" ")}
+      >
         {children}
       </code>
     ),
