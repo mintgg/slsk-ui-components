@@ -47,10 +47,40 @@ pnpm dev
 - 文档首页：`http://localhost:3000/docs`
 - FormInput：`http://localhost:3000/docs/components/form-input`
 
-代码提交
+## npm 包构建
+
+组件库使用 tsup 构建 npm 包产物，入口为 [index.ts](./src/index.ts)，配置文件为 [tsup.config.ts](./tsup.config.ts)。
+
+构建命令：
+
+```bash
+pnpm build:lib
+```
+
+构建产物输出到 `dist`：
+
+```text
+dist/
+├── index.js
+├── index.cjs
+├── index.d.ts
+└── *.map
+```
+
+package 产物字段：
+
+- `main`：CommonJS 入口
+- `module`：ESM 入口
+- `types`：TypeScript 类型入口
+- `exports`：npm 包导出入口
+- `files`：发布时只包含 `dist`
+
+React 和 React DOM 已配置为 `peerDependencies`，不会被打包进组件库产物。
+
+## 代码提交
 
 - git add 添加变更文件
-- pnpm commit 提交变更
+- pnpm commit 提交变更并自动 push
 
 ## 组件开发约定
 

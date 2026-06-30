@@ -4,14 +4,28 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.9.0",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:lib": "tsup",
     "start": "next start",
     "lint": "oxlint .",
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
-    "commit": "cz"
+    "commit": "cz && git push"
   },
   "dependencies": {
     "@mdx-js/loader": "latest",
@@ -26,6 +40,10 @@
     "react-dom": "latest",
     "tailwind-merge": "latest"
   },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
   "devDependencies": {
     "@commitlint/cli": "^21.1.0",
     "@commitlint/config-conventional": "^21.1.0",
@@ -39,6 +57,7 @@
     "oxlint": "latest",
     "postcss": "latest",
     "tailwindcss": "^3.4.17",
+    "tsup": "^8.5.1",
     "typescript": "latest"
   },
   "config": {
