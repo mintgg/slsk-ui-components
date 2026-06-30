@@ -1,0 +1,11 @@
+{
+  "name": "select",
+  "type": "registry:component",
+  "title": "Select",
+  "description": "支持受控、非受控、清空按钮、加载态和校验状态的下拉选择组件。",
+  "files": [
+    "src/components/select/select.tsx",
+    "src/components/select/select.types.ts",
+    "src/components/select/index.ts"
+  ]
+}
