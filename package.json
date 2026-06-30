@@ -1,0 +1,53 @@
+{
+  "name": "nx-components",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "oxlint .",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky",
+    "commit": "cz"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "latest",
+    "@mdx-js/react": "latest",
+    "@next/mdx": "latest",
+    "@radix-ui/react-slot": "latest",
+    "class-variance-authority": "latest",
+    "clsx": "latest",
+    "lucide-react": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwind-merge": "latest"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.1.0",
+    "@commitlint/config-conventional": "^21.1.0",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "latest",
+    "commitizen": "^4.3.2",
+    "cz-git": "^1.13.1",
+    "husky": "^9.1.7",
+    "oxlint": "latest",
+    "postcss": "latest",
+    "tailwindcss": "^3.4.17",
+    "typescript": "latest"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git",
+      "czConfig": "./cz.config.mjs"
+    }
+  },
+  "volta": {
+    "node": "24.18.0"
+  }
+}

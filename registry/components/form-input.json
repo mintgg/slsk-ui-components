@@ -1,0 +1,11 @@
+{
+  "name": "form-input",
+  "type": "registry:component",
+  "title": "FormInput",
+  "description": "支持受控、非受控、清空按钮和校验状态的表单输入组件。",
+  "files": [
+    "src/components/form-input/form-input.tsx",
+    "src/components/form-input/form-input.types.ts",
+    "src/components/form-input/index.ts"
+  ]
+}

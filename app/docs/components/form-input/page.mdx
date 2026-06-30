@@ -1,0 +1,211 @@
+import { FormInputDemo } from "@/components/examples/form-input-demo";
+
+export const metadata = {
+  title: "FormInput - NX Components",
+  description:
+    "支持受控值、非受控默认值、前后缀、最大长度、清空按钮和校验状态的基础输入框组件。",
+};
+
+# FormInput
+
+<div className="mt-4 rounded-2xl border bg-gradient-to-br from-slate-50 to-white p-6 shadow-sm">
+  <div className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+    表单组件
+  </div>
+  <div className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
+    支持受控值、非受控默认值、前缀节点、后缀节点、最大输入长度、清空按钮、回车事件和校验状态的基础输入框组件，适合在表单、筛选栏和搜索输入场景中复用。
+  </div>
+</div>
+
+## 组件预览
+
+<div className="mt-6 rounded-2xl border bg-white p-10 shadow-sm">
+  <FormInputDemo />
+</div>
+
+## 基础用法
+
+```tsx
+import { FormInput } from "@/src/components/form-input";
+
+export function Demo() {
+  return (
+    <FormInput
+      placeholder="请输入内容"
+      onChange={({ value, event }) => console.log(value, event)}
+      onChangeValue={(value) => console.log(value)}
+      onPressEnter={(event) => console.log(event.currentTarget.value)}
+    />
+  );
+}
+```
+
+## Props
+
+<div className="grid gap-3">
+  <div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+    <div>
+      <div className="font-mono text-sm font-semibold text-slate-950">value</div>
+      <div className="mt-1 text-xs text-muted-foreground">受控值</div>
+    </div>
+    <code className="w-fit rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">string</code>
+    <div className="text-sm text-muted-foreground">默认值：-</div>
+  </div>
+
+<div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+  <div>
+    <div className="font-mono text-sm font-semibold text-slate-950">
+      defaultValue
+    </div>
+    <div className="mt-1 text-xs text-muted-foreground">非受控默认值</div>
+  </div>
+  <code className="w-fit rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">
+    string
+  </code>
+  <div className="text-sm text-muted-foreground">默认值：-</div>
+</div>
+
+<div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+  <div>
+    <div className="font-mono text-sm font-semibold text-slate-950">
+      disabled
+    </div>
+    <div className="mt-1 text-xs text-muted-foreground">是否禁用</div>
+  </div>
+  <code className="w-fit rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">
+    boolean
+  </code>
+  <div className="text-sm text-muted-foreground">默认值：false</div>
+</div>
+
+<div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+  <div>
+    <div className="font-mono text-sm font-semibold text-slate-950">
+      hideClear
+    </div>
+    <div className="mt-1 text-xs text-muted-foreground">是否隐藏清空按钮</div>
+  </div>
+  <code className="w-fit rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">
+    boolean
+  </code>
+  <div className="text-sm text-muted-foreground">默认值：false</div>
+</div>
+
+<div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+  <div>
+    <div className="font-mono text-sm font-semibold text-slate-950">prefix</div>
+    <div className="mt-1 text-xs text-muted-foreground">输入框前缀节点</div>
+  </div>
+  <code className="w-fit rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">
+    React.ReactNode
+  </code>
+  <div className="text-sm text-muted-foreground">默认值：-</div>
+</div>
+
+<div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+  <div>
+    <div className="font-mono text-sm font-semibold text-slate-950">suffix</div>
+    <div className="mt-1 text-xs text-muted-foreground">输入框后缀节点</div>
+  </div>
+  <code className="w-fit rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">
+    React.ReactNode
+  </code>
+  <div className="text-sm text-muted-foreground">默认值：-</div>
+</div>
+
+<div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+  <div>
+    <div className="font-mono text-sm font-semibold text-slate-950">
+      placeholder
+    </div>
+    <div className="mt-1 text-xs text-muted-foreground">输入框占位文本</div>
+  </div>
+  <code className="w-fit rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">
+    string
+  </code>
+  <div className="text-sm text-muted-foreground">默认值：-</div>
+</div>
+
+<div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+  <div>
+    <div className="font-mono text-sm font-semibold text-slate-950">
+      maxLength
+    </div>
+    <div className="mt-1 text-xs text-muted-foreground">最大输入长度</div>
+  </div>
+  <code className="w-fit rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">
+    number
+  </code>
+  <div className="text-sm text-muted-foreground">默认值：-</div>
+</div>
+
+<div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+  <div>
+    <div className="font-mono text-sm font-semibold text-slate-950">status</div>
+    <div className="mt-1 text-xs text-muted-foreground">
+      校验状态，用于错误态或警告态展示
+    </div>
+  </div>
+  <code className="w-fit rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">
+    "error" | "warning"
+  </code>
+  <div className="text-sm text-muted-foreground">默认值：-</div>
+</div>
+
+<div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+  <div>
+    <div className="font-mono text-sm font-semibold text-slate-950">
+      onChange
+    </div>
+    <div className="mt-1 text-xs text-muted-foreground">值变化时触发</div>
+  </div>
+  <code className="w-fit max-w-full overflow-x-auto rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">
+    (payload: InputChangePayload) =&gt; void
+  </code>
+  <div className="text-sm text-muted-foreground">默认值：-</div>
+</div>
+
+<div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+  <div>
+    <div className="font-mono text-sm font-semibold text-slate-950">
+      onChangeValue
+    </div>
+    <div className="mt-1 text-xs text-muted-foreground">
+      值变化时触发，仅返回当前值
+    </div>
+  </div>
+  <code className="w-fit max-w-full overflow-x-auto rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">
+    (value: string) =&gt; void
+  </code>
+  <div className="text-sm text-muted-foreground">默认值：-</div>
+</div>
+
+  <div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
+    <div>
+      <div className="font-mono text-sm font-semibold text-slate-950">onPressEnter</div>
+      <div className="mt-1 text-xs text-muted-foreground">回车时触发</div>
+    </div>
+    <code className="w-fit max-w-full overflow-x-auto rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">React.KeyboardEventHandler&lt;HTMLInputElement&gt;</code>
+    <div className="text-sm text-muted-foreground">默认值：-</div>
+  </div>
+</div>
+
+## InputChangePayload
+
+<div className="grid gap-3">
+  <div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr]">
+    <div>
+      <div className="font-mono text-sm font-semibold text-slate-950">value</div>
+      <div className="mt-1 text-xs text-muted-foreground">当前值</div>
+    </div>
+    <code className="w-fit rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">string</code>
+  </div>
+
+  <div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr]">
+    <div>
+      <div className="font-mono text-sm font-semibold text-slate-950">event</div>
+      <div className="mt-1 text-xs text-muted-foreground">变化事件</div>
+    </div>
+    <code className="w-fit max-w-full overflow-x-auto rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">React.ChangeEvent&lt;HTMLInputElement&gt;</code>
+  </div>
+</div>

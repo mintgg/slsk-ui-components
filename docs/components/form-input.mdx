@@ -1,0 +1,53 @@
+# FormInput
+
+FormInput 是第一个表单组件，支持受控值、非受控默认值、前后缀、最大输入长度、清空按钮、回车事件和校验状态。
+
+## 引入
+
+```tsx
+import { FormInput } from "@/src/components/form-input";
+```
+
+## 基础用法
+
+```tsx
+<FormInput placeholder="请输入内容" onChangeValue={(value) => console.log(value)} />
+```
+
+## 带前后缀
+
+```tsx
+<FormInput prefix={<Search />} suffix="元" maxLength={20} />
+```
+
+## 受控用法
+
+```tsx
+const [value, setValue] = React.useState("");
+
+<FormInput value={value} onChangeValue={setValue} />
+```
+
+## API
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| value | `string` | 受控值。 |
+| defaultValue | `string` | 非受控默认值。 |
+| disabled | `boolean` | 是否禁用。 |
+| hideClear | `boolean` | 是否隐藏清空按钮。 |
+| prefix | `React.ReactNode` | 输入框前缀节点。 |
+| suffix | `React.ReactNode` | 输入框后缀节点。 |
+| placeholder | `string` | 输入框占位文本。 |
+| maxLength | `number` | 最大输入长度。 |
+| status | `"error" \| "warning"` | 校验状态，主要用于表单错误态或警告态展示。 |
+| onChange | `(payload: InputChangePayload) => void` | 值变化时触发。 |
+| onChangeValue | `(value: string) => void` | 值变化时触发，仅返回当前值。 |
+| onPressEnter | `React.KeyboardEventHandler<HTMLInputElement>` | 回车时触发。 |
+
+## InputChangePayload
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| value | `string` | 当前值。 |
+| event | `React.ChangeEvent<HTMLInputElement>` | 变化事件。 |
