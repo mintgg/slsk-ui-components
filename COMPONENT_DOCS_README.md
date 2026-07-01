@@ -1,21 +1,12 @@
-# 组件文档编写说明
+# 组件文档编写步骤
 
-这份文档说明在完成一个组件后，如何补充本地可启动、可发布的组件文档。
+这份文档说明新增一个组件后，如何补充组件文档。
 
-## 目标
+## 1. 创建组件目录
 
-每个组件都应同时具备：
+在 `src/components/` 下创建组件目录。
 
-- 组件源码
-- 类型定义
-- 可运行示例
-- MDX 文档页面
-- 左侧菜单入口
-- 统一导出入口
-
-## 推荐组件结构
-
-以 `input` 为例：
+示例：
 
 ```text
 src/components/input/
@@ -25,36 +16,66 @@ src/components/input/
 └── index.ts
 ```
 
-说明：
+如果组件有子组件，可以按需增加文件。
 
-- `input.tsx`：组件实现。
-- `input.types.ts`：组件类型定义。
-- `input.example.tsx`：文档预览示例。
-- `index.ts`：组件与类型导出。
+示例：
 
-## 1. 编写组件源码
+```text
+src/components/input/
+├── input.tsx
+├── password.tsx
+├── textarea.tsx
+├── input-compound.ts
+├── input.types.ts
+├── input.example.tsx
+└── index.ts
+```
 
-在 `src/components/<component-name>/` 下创建组件文件。
+## 2. 编写组件实现
+
+在组件目录中创建组件实现文件。
 
 示例：
 
 ```tsx
-export function Input() {
-  return <input placeholder="请输入内容" />;
+import { cn } from "@/lib/utils";
+import type { InputProps } from "./input.types";
+
+export function Input({ className, ...props }: InputProps) {
+  return (
+    <input
+      {...props}
+      className={cn("rounded-md border border-input px-3 py-2", className)}
+    />
+  );
 }
 ```
 
 要求：
 
 - 使用 TypeScript。
-- props 类型单独放在 `*.types.ts` 中。
+- Props 类型放到 `*.types.ts`。
 - 样式优先使用 Tailwind CSS。
-- className 合并使用 `cn`。
-- 不写入具体业务数据。
+- `className` 合并使用 `cn`。
+- 不写具体业务数据。
 
-## 2. 编写组件示例
+## 3. 编写 Props 类型
 
-在组件目录中创建 `*.example.tsx`，用于文档站点的实时预览。
+在组件目录中创建 `*.types.ts`。
+
+示例：
+
+```ts
+import type { InputHTMLAttributes } from "react";
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  status?: "error" | "warning";
+}
+```
+
+## 4. 编写文档预览示例
+
+在组件目录中创建 `*.example.tsx`。
 
 示例：
 
@@ -66,31 +87,41 @@ export function InputExample() {
 }
 ```
 
-## 3. 更新组件导出
+示例可以包含常用状态，但不要写成业务页面。
 
-组件目录的 `index.ts` 需要导出组件、示例和类型。
+## 5. 更新组件目录导出
+
+更新组件目录的 `index.ts`。
 
 示例：
 
 ```ts
 export { Input } from "./input";
 export { InputExample } from "./input.example";
-export type {
-  InputProps,
-  InputChangePayload,
-  InputStatus,
-} from "./input.types";
+export type { InputProps } from "./input.types";
 ```
 
-## 4. 创建文档示例入口
+## 6. 更新组件库导出入口
 
-在 `components/examples/` 下创建文档站点使用的示例入口。
+如果组件需要对外发布，更新：
+
+```text
+src/components/index.ts
+```
 
 示例：
 
 ```ts
-export { InputExample as InputDemo } from "@/src/components/input";
+export * from "./input";
+export * from "./select";
+export * from "./switch";
 ```
+
+如果组件只用于文档内部展示，可以跳过这一步。
+
+## 7. 创建文档 Demo 入口
+
+在 `components/examples/` 下创建文档使用的 Demo 入口。
 
 推荐文件名：
 
@@ -98,42 +129,37 @@ export { InputExample as InputDemo } from "@/src/components/input";
 components/examples/input-demo.tsx
 ```
 
-## 5. 创建组件 MDX 文档页
+示例：
 
-每个组件页面必须使用 MDX。
+```ts
+export { InputExample as InputDemo } from "@/src/components/input";
+```
+
+## 8. 创建组件 MDX 文档
+
+在 `content/docs/components/` 下创建组件文档。
 
 推荐路径：
 
 ```text
-app/docs/components/input/page.mdx
+content/docs/components/input.mdx
 ```
 
 基础模板：
 
 ````mdx
+---
+title: Input
+description: 支持受控、非受控、清空按钮和校验状态的基础输入组件。
+---
+
 import { InputDemo } from "@/components/examples/input-demo";
 
-export const metadata = {
-  title: "Input - NX Components",
-  description: "Input 组件说明。",
-};
-
-# Input
-
-<div className="mt-4 rounded-2xl border bg-gradient-to-br from-slate-50 to-white p-6 shadow-sm">
-  <div className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
-    表单组件
-  </div>
-  <div className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-    在这里描述输入框组件用途、适用场景和核心能力。
-  </div>
-</div>
+Input 是基础输入组件，适用于表单输入、搜索条件和配置项编辑等场景。
 
 ## 组件预览
 
-<div className="mt-6 rounded-2xl border bg-white p-10 shadow-sm">
-  <InputDemo />
-</div>
+<InputDemo />
 
 ## 基础用法
 
@@ -144,78 +170,106 @@ export function Demo() {
   return <Input placeholder="请输入内容" />;
 }
 ```
-````
 
 ## Props
 
-<div className="grid gap-3">
-  <div className="grid gap-2 rounded-2xl border bg-white p-4 shadow-sm md:grid-cols-[180px_1fr_120px]">
-    <div>
-      <div className="font-mono text-sm font-semibold text-slate-950">propName</div>
-      <div className="mt-1 text-xs text-muted-foreground">属性说明</div>
-    </div>
-    <code className="w-fit rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">string</code>
-    <div className="text-sm text-muted-foreground">默认值：-</div>
-  </div>
-</div>
-```
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>placeholder</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>输入框占位文本。</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>
+        <code>disabled</code>
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>是否禁用。</td>
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>status</code>
+      </td>
+      <td>
+        <code>{'"error" | "warning"'}</code>
+      </td>
+      <td>校验状态。</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+````
 
-## 6. 创建组件文档源文件
+注意：
 
-在 `docs/components/` 下创建同名 MDX 文件，用于沉淀组件说明。
+- 使用 frontmatter 配置 `title` 和 `description`。
+- 组件预览直接写 `<InputDemo />`。
+- Props 使用表格展示。
 
-推荐路径：
+## 9. 更新组件文档导航
+
+更新：
 
 ```text
-docs/components/input.mdx
+content/docs/components/meta.json
 ```
 
-内容建议包含：
-
-- 组件介绍
-- 引入方式
-- 基础用法
-- 常见变体
-- API 表格
-- 注意事项
-
-## 7. 更新左侧组件菜单
-
-新增组件后，必须更新文档导航数据，让左侧菜单显示该组件。
-
-文件：
-
-- [docs-navigation.ts](./lib/docs-navigation.ts)
+把新组件加入 `pages`。
 
 示例：
 
-```ts
-export const componentNavItems: ComponentNavItem[] = [
-  {
-    title: "Input",
-    href: "/docs/components/input",
-    description: "支持受控、非受控、清空按钮、校验状态和密码输入的基础输入组件。",
-  },
-];
+```json
+{
+  "title": "Components",
+  "pages": ["input", "select", "switch"]
+}
 ```
 
-## 8. 启动本地文档站点
+## 10. 更新文档首页
+
+更新：
+
+```text
+content/docs/index.mdx
+```
+
+增加新组件入口。
+
+示例：
+
+```mdx
+- [Input](/docs/components/input)：支持受控、非受控、清空按钮和校验状态的基础输入组件。
+```
+
+## 11. 本地验证
+
+启动文档站点：
 
 ```bash
-pnpm dev
+corepack pnpm dev
 ```
 
-访问：
+访问新组件页面：
 
 ```text
 http://localhost:3000/docs/components/input
 ```
-
-确认：
-
-- 页面能正常打开。
-- 左侧菜单出现新组件。
-- 组件预览可正常渲染。
-- Props/API 内容不撑破布局。
-
-检查全部通过后，说明文档页面可本地启动，也可以通过 Next.js 构建后发布部署。
