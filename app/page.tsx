@@ -11,6 +11,11 @@ const components = [
     description: "支持受控、非受控、清空按钮、加载态和校验状态的下拉选择组件。",
     href: "/docs/components/select",
   },
+  {
+    name: "Switch",
+    description: "支持受控、非受控、加载态、禁用、尺寸和内联文案的开关切换组件。",
+    href: "/docs/components/switch",
+  },
 ];
 
 export default function HomePage() {
