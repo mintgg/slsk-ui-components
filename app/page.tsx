@@ -22,10 +22,13 @@ export default function HomePage() {
   return (
     <main className="mx-auto flex min-h-screen max-w-5xl flex-col gap-10 px-6 py-16">
       <section className="grid gap-4">
-        <p className="text-sm font-medium text-muted-foreground">NX Components</p>
-        <h1 className="text-4xl font-bold tracking-tight">可拓展的公共组件库</h1>
+        <p className="text-sm font-medium text-muted-foreground">
+          NX Components
+        </p>
+        <h1 className="text-4xl font-bold tracking-tight">slsk公共组件库</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          基于 Next.js、shadcn/ui 和 Tailwind CSS 构建，组件源码、示例和文档同仓维护。
+          基于 Next.js、shadcn/ui 和 Tailwind CSS
+          构建，组件源码、示例和文档同仓维护。
         </p>
       </section>
 
@@ -39,7 +42,9 @@ export default function HomePage() {
               className="rounded-xl border bg-background p-5 transition-colors hover:bg-accent"
             >
               <h3 className="font-semibold">{component.name}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{component.description}</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {component.description}
+              </p>
             </Link>
           ))}
         </div>

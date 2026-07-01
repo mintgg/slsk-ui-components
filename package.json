@@ -4,14 +4,30 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.9.0",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:lib": "tsup",
     "start": "next start",
     "lint": "oxlint .",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepare": "husky",
-    "commit": "cz"
+    "commit": "cz && git push"
   },
   "dependencies": {
     "@mdx-js/loader": "latest",
@@ -26,9 +42,16 @@
     "react-dom": "latest",
     "tailwind-merge": "latest"
   },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
   "devDependencies": {
     "@commitlint/cli": "^21.1.0",
     "@commitlint/config-conventional": "^21.1.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
@@ -36,10 +59,13 @@
     "commitizen": "^4.3.2",
     "cz-git": "^1.13.1",
     "husky": "^9.1.7",
+    "jsdom": "^29.1.1",
     "oxlint": "latest",
     "postcss": "latest",
     "tailwindcss": "^3.4.17",
-    "typescript": "latest"
+    "tsup": "^8.5.1",
+    "typescript": "latest",
+    "vitest": "^4.1.9"
   },
   "config": {
     "commitizen": {
