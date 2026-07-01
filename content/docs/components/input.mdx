@@ -1,0 +1,203 @@
+---
+title: Input
+description: 支持受控值、非受控默认值、前后缀、最大长度、清空按钮、校验状态、密码输入和多行文本输入的基础输入框组件。
+---
+
+import { InputDemo } from "@/components/examples/input-demo";
+import {
+  inputPropsDocs,
+  passwordPropsDocs,
+  textAreaPropsDocs,
+  inputChangePayloadDocs,
+  textAreaChangePayloadDocs,
+} from "@/lib/docs/input-props";
+
+## 组件预览
+
+<InputDemo />
+
+## 基础用法
+
+```tsx
+import { Input } from "@/src/components/input";
+
+export function Demo() {
+  return (
+    <Input
+      placeholder="请输入内容"
+      onChange={({ value, event }) => console.log(value, event)}
+      onChangeValue={(value) => console.log(value)}
+      onPressEnter={(event) => console.log(event.currentTarget.value)}
+    />
+  );
+}
+```
+
+## 密码输入
+
+```tsx
+import { Input, Password } from "@/src/components/input";
+
+export function Demo() {
+  const { Password: InputPassword } = Input;
+
+  return (
+    <div className="grid gap-4">
+      <Input.Password placeholder="请输入密码" />
+      <Input.Password visibilityToggle={false} placeholder="不显示切换按钮" />
+      <InputPassword placeholder="解构使用 Password" />
+      <Password placeholder="命名导出使用 Password" />
+    </div>
+  );
+}
+```
+
+## 多行文本
+
+```tsx
+import { Input, TextArea } from "@/src/components/input";
+
+export function Demo() {
+  const { TextArea: InputTextArea } = Input;
+
+  return (
+    <div className="grid gap-4">
+      <Input.TextArea placeholder="请输入多行内容" rows={3} />
+      <Input.TextArea autoSize={{ minRows: 2, maxRows: 6 }} />
+      <InputTextArea placeholder="解构使用 TextArea" />
+      <TextArea placeholder="命名导出使用 TextArea" />
+    </div>
+  );
+}
+```
+
+## Input Props
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    {inputPropsDocs.map((prop) => (
+      <tr key={prop.name}>
+        <td>
+          <code>{prop.name}</code>
+        </td>
+        <td>
+          <code>{prop.type}</code>
+        </td>
+        <td>{prop.description}</td>
+        <td>{prop.defaultValue}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## Password Props
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    {passwordPropsDocs.map((prop) => (
+      <tr key={prop.name}>
+        <td>
+          <code>{prop.name}</code>
+        </td>
+        <td>
+          <code>{prop.type}</code>
+        </td>
+        <td>{prop.description}</td>
+        <td>{prop.defaultValue}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## TextArea Props
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    {textAreaPropsDocs.map((prop) => (
+      <tr key={prop.name}>
+        <td>
+          <code>{prop.name}</code>
+        </td>
+        <td>
+          <code>{prop.type}</code>
+        </td>
+        <td>{prop.description}</td>
+        <td>{prop.defaultValue}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## InputChangePayload
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    {inputChangePayloadDocs.map((prop) => (
+      <tr key={prop.name}>
+        <td>
+          <code>{prop.name}</code>
+        </td>
+        <td>
+          <code>{prop.type}</code>
+        </td>
+        <td>{prop.description}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## TextAreaChangePayload
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    {textAreaChangePayloadDocs.map((prop) => (
+      <tr key={prop.name}>
+        <td>
+          <code>{prop.name}</code>
+        </td>
+        <td>
+          <code>{prop.type}</code>
+        </td>
+        <td>{prop.description}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

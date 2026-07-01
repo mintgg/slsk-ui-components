@@ -1,0 +1,135 @@
+---
+title: Switch
+description: 支持受控、非受控、加载态、禁用、尺寸和内联文案的开关切换组件。
+---
+
+import { SwitchDemo } from "@/components/examples/switch-demo";
+
+## 组件预览
+
+<SwitchDemo />
+
+## 基础用法
+
+```tsx
+import { Switch } from "@/src/components/switch";
+
+export function Demo() {
+  const [checked, setChecked] = React.useState(false);
+
+  return <Switch value={checked} onChangeValue={setChecked} />;
+}
+```
+
+## Props
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>value</code>
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>受控值</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>
+        <code>defaultValue</code>
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>非受控默认值</td>
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>disabled</code>
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>是否禁用</td>
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>loading</code>
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>是否显示加载状态</td>
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>size</code>
+      </td>
+      <td>
+        <code>{'"default" | "small"'}</code>
+      </td>
+      <td>尺寸</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>checkedChildren</code>
+      </td>
+      <td>
+        <code>ReactNode</code>
+      </td>
+      <td>选中时显示的内联内容</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>
+        <code>unCheckedChildren</code>
+      </td>
+      <td>
+        <code>ReactNode</code>
+      </td>
+      <td>未选中时显示的内联内容</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>
+        <code>onChange</code>
+      </td>
+      <td>
+        <code>{"(payload: SwitchChangePayload) => void"}</code>
+      </td>
+      <td>值变化时触发</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>
+        <code>onChangeValue</code>
+      </td>
+      <td>
+        <code>{"(value: boolean) => void"}</code>
+      </td>
+      <td>值变化时触发，仅返回当前值</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>

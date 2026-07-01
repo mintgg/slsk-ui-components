@@ -1,23 +1,10 @@
-import createMDX from "@next/mdx";
-
-const withMDX = createMDX({
-  options: {
-    rehypePlugins: [
-      [
-        "@shikijs/rehype",
-        {
-          theme: "github-dark-default",
-          langs: ["tsx", "ts", "jsx", "js", "bash", "json", "plaintext"],
-        },
-      ],
-    ],
-  },
-});
+import { createMDX } from "fumadocs-mdx/next";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };
+
+const withMDX = createMDX();
 
 export default withMDX(nextConfig);
