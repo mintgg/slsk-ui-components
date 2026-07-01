@@ -1,0 +1,210 @@
+import { InputDemo } from "@/components/examples/input-demo";
+import {
+  inputPropsDocs,
+  passwordPropsDocs,
+  textAreaPropsDocs,
+  inputChangePayloadDocs,
+  textAreaChangePayloadDocs,
+} from "./props-docs";
+
+export const metadata = {
+  title: "Input - NX Components",
+  description:
+    "支持受控值、非受控默认值、前后缀、最大长度、清空按钮、校验状态、密码输入和多行文本输入的基础输入框组件。",
+};
+
+# Input
+
+<div className="mt-4 rounded-2xl border bg-gradient-to-br from-slate-50 to-white p-6 shadow-sm">
+  <div className="inline-flex items-center px-0 py-1.5 text-base font-bold tracking-wide text-slate-950 font-semibold text-xl">
+    表单组件
+  </div>
+  <div className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
+    支持受控值、非受控默认值、前缀节点、后缀节点、最大输入长度、清空按钮、回车事件、校验状态、密码输入和多行文本输入的基础输入框组件。
+  </div>
+</div>
+
+## 组件预览
+
+<div className="mt-6 rounded-2xl border bg-white p-10 shadow-sm">
+  <InputDemo />
+</div>
+
+## 基础用法
+
+```tsx
+import { Input } from "@/src/components/input";
+
+export function Demo() {
+  return (
+    <Input
+      placeholder="请输入内容"
+      onChange={({ value, event }) => console.log(value, event)}
+      onChangeValue={(value) => console.log(value)}
+      onPressEnter={(event) => console.log(event.currentTarget.value)}
+    />
+  );
+}
+```
+
+## 密码输入
+
+```tsx
+import { Input, Password } from "@/src/components/input";
+
+export function Demo() {
+  const { Password: InputPassword } = Input;
+
+  return (
+    <div className="grid gap-4">
+      <Input.Password placeholder="请输入密码" />
+      <Input.Password visibilityToggle={false} placeholder="不显示切换按钮" />
+      <InputPassword placeholder="解构使用 Password" />
+      <Password placeholder="命名导出使用 Password" />
+    </div>
+  );
+}
+```
+
+## 多行文本
+
+```tsx
+import { Input, TextArea } from "@/src/components/input";
+
+export function Demo() {
+  const { TextArea: InputTextArea } = Input;
+
+  return (
+    <div className="grid gap-4">
+      <Input.TextArea placeholder="请输入多行内容" rows={3} />
+      <Input.TextArea autoSize={{ minRows: 2, maxRows: 6 }} />
+      <InputTextArea placeholder="解构使用 TextArea" />
+      <TextArea placeholder="命名导出使用 TextArea" />
+    </div>
+  );
+}
+```
+
+## Input Props
+
+<div className="grid gap-3">
+  {inputPropsDocs.map((prop) => (
+    <div
+      key={prop.name}
+      className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-[180px_minmax(0,1fr)_120px] md:items-start"
+    >
+      <div>
+        <div className="font-mono text-sm font-semibold text-sky-700">
+          字段名：{prop.name}
+        </div>
+        <div className="mt-1 text-xs leading-5 text-slate-500">
+          描述：{prop.description}
+        </div>
+      </div>
+      <code className="w-fit max-w-full overflow-x-auto whitespace-nowrap rounded-md bg-violet-50 px-2 py-1 text-sm text-violet-700">
+        类型：{prop.type}
+      </code>
+      <div className="text-sm leading-6 text-slate-500">
+        默认值：{prop.defaultValue}
+      </div>
+    </div>
+  ))}
+</div>
+
+## Password Props
+
+<div className="grid gap-3">
+  {passwordPropsDocs.map((prop) => (
+    <div
+      key={prop.name}
+      className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-[180px_minmax(0,1fr)_120px] md:items-start"
+    >
+      <div>
+        <div className="font-mono text-sm font-semibold text-sky-700">
+          字段名：{prop.name}
+        </div>
+        <div className="mt-1 text-xs leading-5 text-slate-500">
+          描述：{prop.description}
+        </div>
+      </div>
+      <code className="w-fit max-w-full overflow-x-auto whitespace-nowrap rounded-md bg-violet-50 px-2 py-1 text-sm text-violet-700">
+        类型：{prop.type}
+      </code>
+      <div className="text-sm leading-6 text-slate-500">
+        默认值：{prop.defaultValue}
+      </div>
+    </div>
+  ))}
+</div>
+
+## TextArea Props
+
+<div className="grid gap-3">
+  {textAreaPropsDocs.map((prop) => (
+    <div
+      key={prop.name}
+      className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-[180px_minmax(0,1fr)_120px] md:items-start"
+    >
+      <div>
+        <div className="font-mono text-sm font-semibold text-sky-700">
+          字段名：{prop.name}
+        </div>
+        <div className="mt-1 text-xs leading-5 text-slate-500">
+          描述：{prop.description}
+        </div>
+      </div>
+      <code className="w-fit max-w-full overflow-x-auto whitespace-nowrap rounded-md bg-violet-50 px-2 py-1 text-sm text-violet-700">
+        类型：{prop.type}
+      </code>
+      <div className="text-sm leading-6 text-slate-500">
+        默认值：{prop.defaultValue}
+      </div>
+    </div>
+  ))}
+</div>
+
+## InputChangePayload
+
+<div className="grid gap-3">
+  {inputChangePayloadDocs.map((prop) => (
+    <div
+      key={prop.name}
+      className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-[180px_minmax(0,1fr)] md:items-start"
+    >
+      <div>
+        <div className="font-mono text-sm font-semibold text-sky-700">
+          {prop.name}
+        </div>
+        <div className="mt-1 text-xs leading-5 text-slate-500">
+          {prop.description}
+        </div>
+      </div>
+      <code className="w-fit max-w-full overflow-x-auto whitespace-nowrap rounded-md bg-violet-50 px-2 py-1 text-sm text-violet-700">
+        {prop.type}
+      </code>
+    </div>
+  ))}
+</div>
+
+## TextAreaChangePayload
+
+<div className="grid gap-3">
+  {textAreaChangePayloadDocs.map((prop) => (
+    <div
+      key={prop.name}
+      className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-[180px_minmax(0,1fr)] md:items-start"
+    >
+      <div>
+        <div className="font-mono text-sm font-semibold text-sky-700">
+          {prop.name}
+        </div>
+        <div className="mt-1 text-xs leading-5 text-slate-500">
+          {prop.description}
+        </div>
+      </div>
+      <code className="w-fit max-w-full overflow-x-auto whitespace-nowrap rounded-md bg-violet-50 px-2 py-1 text-sm text-violet-700">
+        {prop.type}
+      </code>
+    </div>
+  ))}
+</div>

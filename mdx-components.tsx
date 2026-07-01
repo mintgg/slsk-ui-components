@@ -6,6 +6,7 @@ type MDXComponentProps = {
 };
 
 type CodeProps = ComponentPropsWithoutRef<"code">;
+type PreProps = ComponentPropsWithoutRef<"pre">;
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -43,21 +44,43 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </td>
     ),
-    pre: ({ children }: MDXComponentProps) => (
-      <pre className="mt-6 rounded-2xl border bg-white p-10 shadow-sm">
-        {children}
-      </pre>
+    pre: ({ children, className, ...props }: PreProps) => (
+      <div className="mt-6 overflow-hidden rounded-xl border border-[#30363d] bg-[#0d1117] shadow-sm">
+        <div className="flex items-center justify-between border-b border-[#30363d] bg-[#161b22] px-4 py-2 text-xs text-[#c9d1d9]">
+          <span className="font-mono">示例代码</span>
+        </div>
+        <pre
+          {...props}
+          className={[
+            "overflow-x-auto p-4 text-[13px] leading-5",
+            className ?? "",
+          ].join(" ")}
+        >
+          {children}
+        </pre>
+      </div>
     ),
-    code: ({ children, className }: CodeProps) => (
-      <code
-        className={[
-          "rounded-md px-1.5 py-0.5 text-[0.9em]",
-          className ?? "bg-slate-100 text-slate-800",
-        ].join(" ")}
-      >
-        {children}
-      </code>
-    ),
+    code: ({ children, className, ...props }: CodeProps) => {
+      if (className?.includes("language-") || typeof children !== "string") {
+        return (
+          <code {...props} className={className}>
+            {children}
+          </code>
+        );
+      }
+
+      return (
+        <code
+          {...props}
+          className={[
+            "rounded-md px-1.5 py-0.5 text-[0.9em]",
+            className ?? "bg-slate-100 text-slate-800",
+          ].join(" ")}
+        >
+          {children}
+        </code>
+      );
+    },
     ...components,
   };
 }

@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const components = [
   {
-    name: "FormInput",
-    description: "支持受控、非受控、清空按钮和校验状态的表单输入组件。",
-    href: "/docs/components/form-input",
+    name: "Input",
+    description: "支持受控、非受控、清空按钮、校验状态、密码输入和多行文本输入的基础输入组件。",
+    href: "/docs/components/input",
   },
   {
     name: "Select",

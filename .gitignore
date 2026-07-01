@@ -1,7 +1,7 @@
 node_modules
+out
+dist
 .next
 .env
 .trae
 *.tsbuildinfo
-out
-dist

@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "type": "registry:component",
+  "title": "Input",
+  "description": "支持受控、非受控、清空按钮、校验状态、密码输入和多行文本输入的基础输入组件。",
+  "files": [
+    "src/components/input/input.tsx",
+    "src/components/input/password.tsx",
+    "src/components/input/textarea.tsx",
+    "src/components/input/input-compound.ts",
+    "src/components/input/input.types.ts",
+    "src/components/input/index.ts"
+  ]
+}

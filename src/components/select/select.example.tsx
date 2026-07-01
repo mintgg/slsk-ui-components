@@ -1,12 +1,6 @@
 "use client";
 
 import * as React from "react";
-import {
-  BankOutlined,
-  EnvironmentOutlined,
-  ExperimentOutlined,
-  RocketOutlined,
-} from "@ant-design/icons";
 import { Select } from "./select";
 import type { SelectOption, SelectValue } from "./select.types";
 

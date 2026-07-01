@@ -3,9 +3,40 @@
 import * as React from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { InputProps } from "./form-input.types";
+import type { InputProps, InputStatus } from "./input.types";
 
-export const FormInput = React.forwardRef<HTMLInputElement, InputProps>(
+type BaseInputProps = InputProps & {
+  extraSuffix?: React.ReactNode;
+};
+
+const INPUT_STATUS_CLASS_NAME_MAP: Record<InputStatus, string> = {
+  error: "border-red-500 focus-visible:ring-red-500",
+  warning: "border-amber-500 focus-visible:ring-amber-500",
+};
+
+const SUFFIX_PADDING_CLASS_NAME_MAP = {
+  1: "pr-9",
+  2: "pr-16",
+  3: "pr-24",
+} as const;
+
+function getSuffixPaddingClassName(count: number) {
+  if (count <= 0) {
+    return undefined;
+  }
+
+  const normalizedCount = Math.min(
+    count,
+    3,
+  ) as keyof typeof SUFFIX_PADDING_CLASS_NAME_MAP;
+  return SUFFIX_PADDING_CLASS_NAME_MAP[normalizedCount];
+}
+
+function getInputStatusClassName(status?: InputStatus) {
+  return status ? INPUT_STATUS_CLASS_NAME_MAP[status] : undefined;
+}
+
+export const InputBase = React.forwardRef<HTMLInputElement, BaseInputProps>(
   (
     {
       value,
@@ -14,6 +45,7 @@ export const FormInput = React.forwardRef<HTMLInputElement, InputProps>(
       hideClear,
       prefix,
       suffix,
+      extraSuffix,
       placeholder,
       maxLength,
       status,
@@ -29,6 +61,9 @@ export const FormInput = React.forwardRef<HTMLInputElement, InputProps>(
     const [innerValue, setInnerValue] = React.useState(defaultValue ?? "");
     const currentValue = isControlled ? (value ?? "") : innerValue;
     const canClear = !hideClear && !disabled && currentValue.length > 0;
+    const suffixCount = [suffix, canClear, extraSuffix].filter(Boolean).length;
+    const suffixPaddingClassName = getSuffixPaddingClassName(suffixCount);
+    const statusClassName = getInputStatusClassName(status);
 
     const emitChange = React.useCallback(
       (nextValue: string, event: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,6 +106,7 @@ export const FormInput = React.forwardRef<HTMLInputElement, InputProps>(
           </span>
         ) : null}
         <input
+          {...props}
           ref={ref}
           value={currentValue}
           disabled={disabled}
@@ -83,33 +119,32 @@ export const FormInput = React.forwardRef<HTMLInputElement, InputProps>(
           className={cn(
             "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
             prefix && "pl-9",
-            (suffix || canClear) && "pr-9",
-            suffix && canClear && "pr-16",
-            status === "error" && "border-red-500 focus-visible:ring-red-500",
-            status === "warning" &&
-              "border-amber-500 focus-visible:ring-amber-500",
+            suffixPaddingClassName,
+            statusClassName,
             className,
           )}
-          {...props}
         />
-        <div className="absolute right-2 flex items-center gap-1">
-          {suffix ? (
-            <span className="text-muted-foreground">{suffix}</span>
-          ) : null}
-          {canClear ? (
-            <button
-              type="button"
-              aria-label="清空输入内容"
-              className="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-              onClick={handleClear}
-            >
-              <X className="h-4 w-4" />
-            </button>
-          ) : null}
-        </div>
+        {suffixCount > 0 ? (
+          <div className="absolute right-2 flex items-center gap-1">
+            {suffix ? (
+              <span className="text-muted-foreground">{suffix}</span>
+            ) : null}
+            {canClear ? (
+              <button
+                type="button"
+                aria-label="清空输入内容"
+                className="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                onClick={handleClear}
+              >
+                <X className="h-4 w-4" />
+              </button>
+            ) : null}
+            {extraSuffix}
+          </div>
+        ) : null}
       </div>
     );
   },
 );
 
-FormInput.displayName = "FormInput";
+InputBase.displayName = "Input";

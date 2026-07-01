@@ -1,0 +1,104 @@
+# Input
+
+Input 是基础输入框组件，支持受控值、非受控默认值、前后缀、最大输入长度、清空按钮、回车事件、校验状态、密码输入和多行文本输入。
+
+## 引入
+
+```tsx
+import { Input, Password, TextArea } from "@/src/components/input";
+```
+
+## 基础用法
+
+```tsx
+<Input placeholder="请输入内容" onChangeValue={(value) => console.log(value)} />
+```
+
+## 带前后缀
+
+```tsx
+<Input prefix={<Search />} suffix="元" maxLength={20} />
+```
+
+## 受控用法
+
+```tsx
+const [value, setValue] = React.useState("");
+
+<Input value={value} onChangeValue={setValue} />;
+```
+
+## 密码输入
+
+```tsx
+<Input.Password placeholder="请输入密码" />
+<Input.Password visibilityToggle={false} placeholder="不显示切换按钮" />
+
+const { Password } = Input;
+
+<Password placeholder="解构使用 Password" />
+```
+
+## 多行文本
+
+```tsx
+<Input.TextArea placeholder="请输入多行内容" rows={3} />
+<Input.TextArea autoSize={{ minRows: 2, maxRows: 6 }} />
+
+const { TextArea } = Input;
+
+<TextArea placeholder="解构使用 TextArea" />
+```
+
+## API
+
+| 属性          | 类型                                           | 说明                                       |
+| ------------- | ---------------------------------------------- | ------------------------------------------ |
+| value         | `string`                                       | 受控值。                                   |
+| defaultValue  | `string`                                       | 非受控默认值。                             |
+| disabled      | `boolean`                                      | 是否禁用。                                 |
+| hideClear     | `boolean`                                      | 是否隐藏清空按钮。                         |
+| prefix        | `React.ReactNode`                              | 输入框前缀节点。                           |
+| suffix        | `React.ReactNode`                              | 输入框后缀节点。                           |
+| placeholder   | `string`                                       | 输入框占位文本。                           |
+| maxLength     | `number`                                       | 最大输入长度。                             |
+| status        | `"error" \| "warning"`                         | 校验状态，主要用于表单错误态或警告态展示。 |
+| onChange      | `(payload: InputChangePayload) => void`        | 值变化时触发。                             |
+| onChangeValue | `(value: string) => void`                      | 值变化时触发，仅返回当前值。               |
+| onPressEnter  | `React.KeyboardEventHandler<HTMLInputElement>` | 回车时触发。                               |
+
+## Password API
+
+| 属性             | 类型                                                                                                       | 说明                                           |
+| ---------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| visibilityToggle | `boolean \| { visible?: boolean; defaultVisible?: boolean; onVisibleChange?: (visible: boolean) => void }` | 是否显示密码可见性切换按钮，或配置受控可见性。 |
+
+## TextArea API
+
+| 属性          | 类型                                                | 说明                         |
+| ------------- | --------------------------------------------------- | ---------------------------- |
+| value         | `string`                                            | 受控值。                     |
+| defaultValue  | `string`                                            | 非受控默认值。               |
+| disabled      | `boolean`                                           | 是否禁用。                   |
+| placeholder   | `string`                                            | 输入框占位文本。             |
+| maxLength     | `number`                                            | 最大输入长度。               |
+| readOnly      | `boolean`                                           | 是否只读。                   |
+| rows          | `number`                                            | 默认可见行数。               |
+| autoSize      | `boolean \| { minRows?: number; maxRows?: number }` | 是否自动调整高度。           |
+| status        | `"error" \| "warning"`                              | 校验状态。                   |
+| onChange      | `(payload: TextAreaChangePayload) => void`          | 值变化时触发。               |
+| onChangeValue | `(value: string) => void`                           | 值变化时触发，仅返回当前值。 |
+
+## InputChangePayload
+
+| 属性  | 类型                                  | 说明       |
+| ----- | ------------------------------------- | ---------- |
+| value | `string`                              | 当前值。   |
+| event | `React.ChangeEvent<HTMLInputElement>` | 变化事件。 |
+
+## TextAreaChangePayload
+
+| 属性  | 类型                                     | 说明       |
+| ----- | ---------------------------------------- | ---------- |
+| value | `string`                                 | 当前值。   |
+| event | `React.ChangeEvent<HTMLTextAreaElement>` | 变化事件。 |

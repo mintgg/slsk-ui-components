@@ -45,7 +45,7 @@ pnpm dev
 
 - 首页：`http://localhost:3000`
 - 文档首页：`http://localhost:3000/docs`
-- FormInput：`http://localhost:3000/docs/components/form-input`
+- Input：`http://localhost:3000/docs/components/input`
 
 ## npm 包构建
 

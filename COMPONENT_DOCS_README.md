@@ -15,21 +15,21 @@
 
 ## 推荐组件结构
 
-以 `form-input` 为例：
+以 `input` 为例：
 
 ```text
-src/components/form-input/
-├── form-input.tsx
-├── form-input.types.ts
-├── form-input.example.tsx
+src/components/input/
+├── input.tsx
+├── input.types.ts
+├── input.example.tsx
 └── index.ts
 ```
 
 说明：
 
-- `form-input.tsx`：组件实现。
-- `form-input.types.ts`：组件类型定义。
-- `form-input.example.tsx`：文档预览示例。
+- `input.tsx`：组件实现。
+- `input.types.ts`：组件类型定义。
+- `input.example.tsx`：文档预览示例。
 - `index.ts`：组件与类型导出。
 
 ## 1. 编写组件源码
@@ -39,7 +39,7 @@ src/components/form-input/
 示例：
 
 ```tsx
-export function FormInput() {
+export function Input() {
   return <input placeholder="请输入内容" />;
 }
 ```
@@ -59,10 +59,10 @@ export function FormInput() {
 示例：
 
 ```tsx
-import { FormInput } from "./form-input";
+import { Input } from "./input";
 
-export function FormInputExample() {
-  return <FormInput placeholder="请输入内容" />;
+export function InputExample() {
+  return <Input placeholder="请输入内容" />;
 }
 ```
 
@@ -73,13 +73,13 @@ export function FormInputExample() {
 示例：
 
 ```ts
-export { FormInput } from "./form-input";
-export { FormInputExample } from "./form-input.example";
+export { Input } from "./input";
+export { InputExample } from "./input.example";
 export type {
   InputProps,
   InputChangePayload,
   InputStatus,
-} from "./form-input.types";
+} from "./input.types";
 ```
 
 ## 4. 创建文档示例入口
@@ -89,13 +89,13 @@ export type {
 示例：
 
 ```ts
-export { FormInputExample as FormInputDemo } from "@/src/components/form-input";
+export { InputExample as InputDemo } from "@/src/components/input";
 ```
 
 推荐文件名：
 
 ```text
-components/examples/form-input-demo.tsx
+components/examples/input-demo.tsx
 ```
 
 ## 5. 创建组件 MDX 文档页
@@ -105,20 +105,20 @@ components/examples/form-input-demo.tsx
 推荐路径：
 
 ```text
-app/docs/components/form-input/page.mdx
+app/docs/components/input/page.mdx
 ```
 
 基础模板：
 
 ````mdx
-import { FormInputDemo } from "@/components/examples/form-input-demo";
+import { InputDemo } from "@/components/examples/input-demo";
 
 export const metadata = {
-  title: "FormInput - NX Components",
-  description: "FormInput 组件说明。",
+  title: "Input - NX Components",
+  description: "Input 组件说明。",
 };
 
-# FormInput
+# Input
 
 <div className="mt-4 rounded-2xl border bg-gradient-to-br from-slate-50 to-white p-6 shadow-sm">
   <div className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
@@ -132,16 +132,16 @@ export const metadata = {
 ## 组件预览
 
 <div className="mt-6 rounded-2xl border bg-white p-10 shadow-sm">
-  <FormInputDemo />
+  <InputDemo />
 </div>
 
 ## 基础用法
 
 ```tsx
-import { FormInput } from "@/src/components/form-input";
+import { Input } from "@/src/components/input";
 
 export function Demo() {
-  return <FormInput placeholder="请输入内容" />;
+  return <Input placeholder="请输入内容" />;
 }
 ```
 ````
@@ -167,7 +167,7 @@ export function Demo() {
 推荐路径：
 
 ```text
-docs/components/form-input.mdx
+docs/components/input.mdx
 ```
 
 内容建议包含：
@@ -192,9 +192,9 @@ docs/components/form-input.mdx
 ```ts
 export const componentNavItems: ComponentNavItem[] = [
   {
-    title: "FormInput",
-    href: "/docs/components/form-input",
-    description: "支持受控、非受控、清空按钮和校验状态的表单输入组件。",
+    title: "Input",
+    href: "/docs/components/input",
+    description: "支持受控、非受控、清空按钮、校验状态和密码输入的基础输入组件。",
   },
 ];
 ```
@@ -208,7 +208,7 @@ pnpm dev
 访问：
 
 ```text
-http://localhost:3000/docs/components/form-input
+http://localhost:3000/docs/components/input
 ```
 
 确认：

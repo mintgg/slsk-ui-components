@@ -28,3 +28,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .shiki {
+    background-color: transparent !important;
+  }
+
+  .shiki code {
+    display: grid;
+    min-width: 100%;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+  }
+
+  .shiki code .line {
+    min-height: 1.25rem;
+  }
+}
